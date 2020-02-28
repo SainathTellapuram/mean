@@ -14,17 +14,93 @@ let emailLengthChecker = (email) =>{
         }
     }
 }
+let usernameLengthChecker = (username) =>{
+    if(!username){
+        return false;
+    } else {
+        if(username.length < 3 || username.length > 15){
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+
+let validUsername = (username) =>{
+    if(!username){
+        return false;
+    } else {
+        const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
+        return regExp.test(username)
+    }
+};
+
+const usernamevalidators = [{
+    validator : usernameLengthChecker,
+    message:"Username myust be at least 3 character but no more 15 character"
+},
+{
+    validator : validUsername,
+    message:"Must be a valid username"
+}
+]
+
+let validEmailChecker = (email) =>{
+    if(!email){
+        return false;
+    } else {
+        const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        return regExp.test(email);
+    }
+}
+
+let validPassword = (password) =>{
+    if(!password){
+        return false;
+    } else {
+        const regExp = new RegExp(/^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[\d])(?=.*?[\W]).{8,35}$/);
+        return regExp.test(password);
+    }
+}
+
+let passwordLengthChecker = (password) =>{
+    if(!password){
+        return false;
+    } else {
+        if(password.length < 8 || password.length > 30){
+            return false;
+        }else{
+            return true;
+        }
+    }
+};
+
+
+const passwordValidators = [
+    {
+        validator : passwordLengthChecker,message:'Password must be at least 8 Characters but no more than 35'
+    },
+    {
+        validator : validPassword,message:'Must have at least one uppercase, lowercase, special character, and number'
+
+    }
+];
+
 
 const emailValidators = [
     {
         validator : emailLengthChecker,message:'EMail must be more than 5 and less than 30 characters'
+    },
+    {
+        validator : validEmailChecker,message:'Must be valid EMail'
+
     }
 ]
 
 const userSchema = new Schema({
     email :{type:String,required:true,unique:true,lowercase:true,validate:emailValidators},
-    username :{type:String,required:true,unique:true,lowercase:true},
-    password :{type:String,required:true},
+    username :{type:String,required:true,unique:true,lowercase:true,validate:usernamevalidators},
+    password :{type:String,required:true,validate:passwordValidators},
 })
 userSchema.pre('save',function(next){
     if(!this.isModified('password'))
