@@ -22,9 +22,12 @@
   },
   "homepage": "https://github.com/SainathTellapuram/mean#readme",
   "dependencies": {
+    "@ngx-translate/http-loader": "^4.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.9.2",
+    "rxjs-compat": "^6.5.4"
   }
 }

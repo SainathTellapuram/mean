@@ -7,6 +7,7 @@ const path = require('path');
 const authentication = require('./routes/authentication')(router);
 const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
+const cors = require('cors');
 mongoose.connect(config.uri,(err)=>{
     if(err){
         console.log('Not connected ',err);
@@ -15,6 +16,11 @@ mongoose.connect(config.uri,(err)=>{
     }
 });
 
+
+
+app.use(cors({
+    origin:'http://localhost:4200'
+}));
 
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json());
