@@ -14,6 +14,7 @@ let emailLengthChecker = (email) =>{
         }
     }
 }
+
 let usernameLengthChecker = (username) =>{
     if(!username){
         return false;
@@ -37,7 +38,7 @@ let validUsername = (username) =>{
 
 const usernamevalidators = [{
     validator : usernameLengthChecker,
-    message:"Username myust be at least 3 character but no more 15 character"
+    message:"Username must be at least 3 character but no more 15 character"
 },
 {
     validator : validUsername,

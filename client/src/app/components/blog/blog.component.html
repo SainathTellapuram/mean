@@ -1,0 +1,51 @@
+<h1 class="page-header">Clients Details</h1>
+<!-- <div class="row show-hide-message">
+    <div [ngClass]="messageClass">
+        {{ message }}
+    </div>
+</div> -->
+
+<button type="button" name='button' class="btn btn-warning" *ngIf="!newPost" (click)="newBlogForm()">New Client</button>
+<button [disabled]="loadingBlogs" type="button" name='button' class="btn btn-secondary" *ngIf="!newPost" (click)="reloadBlogs()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Reload</button>
+<!-- <button [disabled]="loadingBlogs" type="button" name='button' class="btn btn-secondary" *ngIf="!newPost" (click)="reloadBlogs()"><i class="fa fa-refresh fa-spin"></i>&nbsp;&nbsp;Reload</button> -->
+
+<br/>
+<br/>
+<div *ngIf="!newPost">
+  <div id="accordion">
+
+    <div class="card">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+          First Name 
+        </a>
+        <p class="pull-right">Status</p>
+      </div>
+      <div id="collapseOne" class="collapse hide" data-parent="#accordion">
+        <div class="card-body">
+            <table class="table">
+              <tr class="thead-dark"><td>EMail</td><td>Mobile</td></tr>
+              <tr><td>Qualification</td><td>Address</td></tr>
+              <tr><td>Plan</td><td>Course</td></tr>
+              <tr><td>Nationality</td><td>
+
+                <div class="btn-group dropdown">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropup
+                  </button>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="#">Started</a>
+                      <a class="dropdown-item" href="#">In Process</a>
+                      <a class="dropdown-item" href="#">Completed</a>
+                  </div>
+                </div>
+              </td></tr>
+
+            </table>
+
+          <a href="#"><button type="button" name="button" class="btn btn-sm btn-success m-2">Edit</button></a>
+          <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+        </div>
+      </div>
+    </div>
+</div>

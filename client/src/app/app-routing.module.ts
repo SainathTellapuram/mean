@@ -5,7 +5,10 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {RegisterComponent} from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent} from './components/profile/profile.component';
+import { BlogComponent } from './components/blog/blog.component';
 import { AuthGuard } from './guards/auth.guard';
+import { NotAuthGuard } from './guards/notauth.guard';
+
 const routes: Routes = [
   {
     path:'',component: HomeComponent
@@ -14,13 +17,17 @@ const routes: Routes = [
     path:'dashboard',component: DashboardComponent,canActivate:[AuthGuard]
   },
   {
-    path:'register',component: RegisterComponent
+    path:'register',component: RegisterComponent,canActivate:[NotAuthGuard]
   },
   {
-    path:'login',component: LoginComponent
+    path:'login',component: LoginComponent,canActivate:[NotAuthGuard]
   },
+  
   {
     path:'profile',component: ProfileComponent,canActivate:[AuthGuard]
+  },
+  {
+    path:'blog',component: BlogComponent,canActivate:[AuthGuard]
   },
   {
     path:'**',component:HomeComponent
@@ -33,3 +40,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
