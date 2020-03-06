@@ -121,21 +121,21 @@ module.exports = (router) =>{
            }
        }
     });
-    router.use((req,res,next)=>{
-        const token = req.headers['authorization'];
-        if(!token){
-            res.json({success:false,message:'No Token Provided'});
-        } else {
-            jwt.verify(token, config.secret, (err, decoded) => {
-                if(err){
-                    res.json({success:false,message:'Token Invalid: ' + err});
-                } else {
-                    req.decoded = decoded;
-                    next();
-                }
-            });
-        }
-    });
+    // router.use((req,res,next)=>{
+    //     const token = req.headers['authorization'];
+    //     if(!token){
+    //         res.json({success:false,message:'No Token Provided'});
+    //     } else {
+    //         jwt.verify(token, config.secret, (err, decoded) => {
+    //             if(err){
+    //                 res.json({success:false,message:'Token Invalid: ' + err});
+    //             } else {
+    //                 req.decoded = decoded;
+    //                 next();
+    //             }
+    //         });
+    //     }
+    // });
 
     router.get('/profile',(req,res)=> {
         User.findOne({_id:req.decoded.userId}).select('username email').exec((err,user)=>{

@@ -30,7 +30,6 @@ const emailValidators = [
     },
     {
         validator : validEmailChecker,message:'Must be valid EMail'
-
     }
 ]
 // firstname validation
@@ -157,31 +156,31 @@ const addressvalidators = [{
 ]
 
 //schema
-let schemaLengthChecker = (schema) =>{
-    if(!schema){
+let planLengthChecker = (plan) =>{
+    if(!plan){
         return false;
     } else {
-        if(schema.length < 4 || schema.length > 10){
+        if(plan.length < 4 || plan.length > 10){
             return false;
         } else {
             return true;
         }
     }
 }
-let validaddress = (schema) =>{
-    if(!schema){
+let validplan = (plan) =>{
+    if(!plan){
         return false;
     } else {
         const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
-        return regExp.test(schema)
+        return regExp.test(plan)
     }
 };
-const schemavalidators = [{
-    validator : schemaLengthChecker,
+const planvalidators = [{
+    validator : planLengthChecker,
     message:"Plan Name must be at least 4 character but no more 10 character"
 },
 {
-    validator : validschema,
+    validator : validplan,
     message:"Must be a valid Plan Name"
 }
 ]
@@ -246,6 +245,36 @@ const countryvalidators = [{
 }
 ]
 
+//Status
+let statusLengthChecker = (status) =>{
+    if(!status){
+        return false;
+    } else {
+        if(status.length < 6 || status.length > 10){
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
+let validstatus = (status) =>{
+    if(!status){
+        return false;
+    } else {
+        const regExp = new RegExp(/^[a-zA-Z]+$/);
+        return regExp.test(status)
+    }
+};
+const statusvalidators = [{
+    validator : statusLengthChecker,
+    message:"status Name must be at least 6 character but no more 10 character"
+},
+{
+    validator : validstatus,
+    message:"Must be a valid status"
+}
+]
+
 
 const clientSchema = new Schema({
     firstname :{ type : String,required:true,validate:firstnamevalidators},
@@ -253,10 +282,10 @@ const clientSchema = new Schema({
     email :{ type : String,required:true,unique:true,lowercase:true,validate:emailValidators},
     qualification :{ type : String,required:true,validate:qualificationvalidators},
     address :{ type : String,required:true,validate:addressvalidators},
-    schema :{ type : String,required:true,validate:schemavalidators},
+    plan :{ type : String,required:true,validate:planvalidators},
     course :{ type : String,required:true,validate:coursevalidators},
     country :{ type : String,required:true,validate:countryvalidators},
-    status: { type : String,required:true},
+    status: { type : String,required:true,validate:statusvalidators},
     AddedOn:{ type:Date,default:Date.now()}
 
 });
