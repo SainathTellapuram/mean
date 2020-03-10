@@ -80,7 +80,7 @@ let validMobile = (mobile) =>{
     if(!mobile){
         return false;
     } else {
-        const regExp = new RegExp(/^[0-9]+$/);
+        const regExp = new RegExp(/^(\+\d{1,3}[- ]?)?\d{10}$/);
         return regExp.test(mobile)
     }
 };
@@ -91,7 +91,7 @@ const mobilevalidators = [{
 },
 {
     validator : validMobile,
-    message:"Must be a valid Mobile"
+    message:"Must be Numbers and valid "
 }
 ]
 // qualification Validation
@@ -277,9 +277,9 @@ const statusvalidators = [{
 
 
 const clientSchema = new Schema({
-    firstname :{ type : String,required:true,validate:firstnamevalidators},
-    mobile :{ type : Number,required:true,validate:mobilevalidators},
-    email :{ type : String,required:true,unique:true,lowercase:true,validate:emailValidators},
+    firstname : { type : String,required:true,validate:firstnamevalidators},
+    mobile :    { type : String,required:true,validate:mobilevalidators},
+    email :     { type : String,required:true,unique:true,lowercase:true,validate:emailValidators},
     qualification :{ type : String,required:true,validate:qualificationvalidators},
     address :{ type : String,required:true,validate:addressvalidators},
     plan :{ type : String,required:true,validate:planvalidators},

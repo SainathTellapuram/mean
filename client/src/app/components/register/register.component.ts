@@ -117,8 +117,8 @@ enableForm(){
       });
   }
 
-  checkEMail(){
-    this.authService.checkEMail(this.form.get('email').value).subscribe(data =>{
+  checkEmail(){
+    this.authService.checkEmail(this.form.get('email').value).subscribe(data =>{
       if(!data.success){
         this.emailValid = false;
         this.emailMessage = data.message;
@@ -130,7 +130,7 @@ enableForm(){
   }
 
   checkUsername(){
-    this.authService.checkEMail(this.form.get('email').value).subscribe(data =>{
+    this.authService.checkEmail(this.form.get('email').value).subscribe(data =>{
       if(!data.success){
         this.usernameValid = false;
         this.usernameMessage = data.message;
