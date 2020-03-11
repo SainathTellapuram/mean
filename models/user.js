@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
-
 let emailLengthChecker = (email) =>{
     if(!email){
         return false;
@@ -14,7 +13,6 @@ let emailLengthChecker = (email) =>{
         }
     }
 }
-
 let usernameLengthChecker = (username) =>{
     if(!username){
         return false;
@@ -26,7 +24,6 @@ let usernameLengthChecker = (username) =>{
         }
     }
 }
-
 let validUsername = (username) =>{
     if(!username){
         return false;
@@ -35,7 +32,6 @@ let validUsername = (username) =>{
         return regExp.test(username)
     }
 };
-
 const usernamevalidators = [{
     validator : usernameLengthChecker,
     message:"Username must be at least 3 character but no more 15 character"
@@ -45,7 +41,6 @@ const usernamevalidators = [{
     message:"Must be a valid username"
 }
 ]
-
 let validEmailChecker = (email) =>{
     if(!email){
         return false;

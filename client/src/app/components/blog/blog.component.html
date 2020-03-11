@@ -11,95 +11,43 @@
 <br/>
 <!-- form -->
 <form [formGroup]="form" name="blogForm" (submit)="onClientSubmit()" *ngIf="newPost">
-<!-- firstname -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.firstname.valid,'has-error':form.controls.firstname.dirty && form.controls.firstname.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="First Name" autocomplete="off" formControlName="firstname"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.firstname.dirty && form.controls.firstname.errors?.required">This field is required</li>
-         <li *ngIf="(form.controls.firstname.dirty && form.controls.firstname.errors?.minlength) || (form.controls.firstname.dirty && form.controls.firstname.errors?.maxlength)">Max Length :15, Min Length : 5</li>
-      </ul>
-   </div>
-</div>
-<!-- Email -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.email.valid,'has-error':form.controls.email.dirty && form.controls.email.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Email" autocomplete="off" formControlName="email"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.email.dirty && form.controls.email.errors?.required">This field is required</li>
-         <li *ngIf="(form.controls.email.dirty && form.controls.email.errors?.minlength) || (form.controls.email.dirty && form.controls.email.errors?.maxlength)">Max Length :31, Min Length : 5</li>
-      </ul>
-   </div>
-</div>
-<!-- mobile -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.mobile.valid,'has-error':form.controls.mobile.dirty && form.controls.mobile.errors}">
-      <input type="number" name="title" class="form-contorl" placeholder="Mobile" autocomplete="off" formControlName="mobile"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.mobile.dirty && form.controls.mobile.errors?.required">This field is required</li>
-         <li *ngIf="(form.controls.mobile.dirty && form.controls.mobile.errors?.minlength) || (form.controls.mobile.dirty && form.controls.mobile.errors?.maxlength)">Max Length :12, Min Length : 10</li>
-      </ul>
-   </div>
-</div>
-<!-- qualification -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.qualification.valid,'has-error':form.controls.qualification.dirty && form.controls.qualification.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Qualification" autocomplete="off" formControlName="qualification"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.qualification.dirty && form.controls.qualification.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<!-- address -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.address.valid,'has-error':form.controls.address.dirty && form.controls.address.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Address" autocomplete="off" formControlName="address"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.address.dirty && form.controls.address.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<!-- plan -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.plan.valid,'has-error':form.controls.plan.dirty && form.controls.plan.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Plan" autocomplete="off" formControlName="plan"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.plan.dirty && form.controls.plan.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<!-- course -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.course.valid,'has-error':form.controls.course.dirty && form.controls.course.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Course" autocomplete="off" formControlName="course"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.course.dirty && form.controls.course.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<!-- country -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.country.valid,'has-error':form.controls.country.dirty && form.controls.country.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="Country" autocomplete="off" formControlName="country"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.country.dirty && form.controls.country.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<!-- status -->
-<div class="form-group">
-   <div [ngClass]="{'has-success':form.controls.status.valid,'has-error':form.controls.status.dirty && form.controls.status.errors}">
-      <input type="text" name="title" class="form-contorl" placeholder="status" autocomplete="off" formControlName="status"/>
-      <ul class="help-block">
-         <li *ngIf="form.controls.status.dirty && form.controls.status.errors?.required">This field is required</li>
-      </ul>
-   </div>
-</div>
-<button type="button" class="btn btn-primary m-2" name="button" [disabled]="processing" (click)="goBack()">Go Back</button>
-<button type="button" class="btn btn-success" [disabled]="processing || !form.valid" name="button">Submit</button>
+      <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp" placeholder="Enter First Name">
+        <small id="firstnameHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter Email">
+      </div>
+      <div class="form-group">
+         <label for="mobile">Mobile</label>
+         <input type="number" class="form-control" id="mobile" placeholder="Enter Mobile">
+       </div>
+       <div class="form-group">
+         <label for="qualification">Qualification</label>
+         <input type="text" class="form-control" id="qualification" placeholder="Enter Qualification">
+       </div>
+       <div class="form-group">
+         <label for="address">Address</label>
+         <input type="text" class="form-control" id="address" placeholder="Enter Address">
+       </div>
+       <div class="form-group">
+         <label for="plan">Plan</label>
+         <input type="text" class="form-control" id="plan" placeholder="Enter Plan">
+       </div>
+       <div class="form-group">
+         <label for="course">Course</label>
+         <input type="text" class="form-control" id="course" placeholder="Enter Course">
+       </div>
+       <div class="form-group">
+         <label for="nationality">Nationality</label>
+         <input type="text" class="form-control" id="nationality" placeholder="Enter Nationality">
+       </div>
+       <a href="#"><button type="button" name="button" class="btn btn-sm btn-success">Add Client</button></a>
 </form>
 <div *ngIf="!newPost">
-<div id="accordion">
+   <div id="accordion">
    <div class="card">
       <div class="card-header">
          <a class="card-link" data-toggle="collapse" href="#collapseOne">

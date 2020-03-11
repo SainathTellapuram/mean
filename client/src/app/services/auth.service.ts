@@ -5,17 +5,11 @@ import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
-
-  domain = "http://localhost:8080/"; // Development Domain - Not Needed in Production
+  domain = "http://localhost:8080/";
   authToken;
   user;
   options;
-
-  constructor(
-    private http: Http
-  ) { }
-
-  // Function to create headers, add token, to be used in HTTP requests
+  constructor(private http: Http) { }
   createAuthenticationHeaders() {
     this.loadToken(); // Get token so it can be attached to headers
     // Headers configuration options
@@ -69,7 +63,7 @@ export class AuthService {
 
   // Function to get user's profile data
   getProfile() {
-    this.createAuthenticationHeaders(); // Create headers before sending to API
+    this.createAuthenticationHeaders();
     return this.http.get(this.domain + 'authentication/profile', this.options).map(res => res.json());
   }
 
