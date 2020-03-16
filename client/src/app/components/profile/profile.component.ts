@@ -7,10 +7,9 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-  constructor(private authService: AuthService) { }
-  username;
-  email;
+  username = ' ';
+  email = ' ';
+  constructor(private authService: AuthService){}
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username;

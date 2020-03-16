@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 const config =  require('../config/database');
 module.exports = (router) =>{
     router.post('/register',(req,res)=>{
-        req.body.email;
-        req.body.username;
-        req.body.password;
         if(!req.body.email){
             res.json({success:false,message: 'You Must provide an EMail'});
         } else {
@@ -22,7 +19,7 @@ module.exports = (router) =>{
                 });
                 user.save((err)=>{
                     if(err){
-                        if(err.code ===11000){
+                        if(err.code === 11000){
                             res.json({success:false,message:'username or email already exists'});
                         } else {
                             if(err.errors){
@@ -73,14 +70,14 @@ module.exports = (router) =>{
         if(!req.params.username){
             res.json({success:false,message:'username was not provided'})
         } else {
-            User.findOne({ email:req.params.username},(err,user)=>{
+            User.findOne({ username:req.params.username},(err,user)=>{
                 if(err){
                     res.json({success:false,message:err});
                 } else {
                     if(user){
                         res.json({success:false,message:'username is already taken'});
                     } else {
-                        res.json({success:false,message:'username is Available'});
+                        res.json({success:true,message:'username is Available'});
                     }
 
                 }
@@ -148,7 +145,7 @@ module.exports = (router) =>{
                     res.json({success : true, user:user});
                 }
             }
-        })
+        });
     });
 
 return router;
