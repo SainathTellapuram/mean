@@ -15,6 +15,7 @@ export class BlogComponent implements OnInit {
   form;
   processing = false;
   username = '';
+  blogPosts;
   constructor(
     private formBuilder: FormBuilder,
     private blogservice: BlogService,
@@ -102,11 +103,12 @@ export class BlogComponent implements OnInit {
         address: this.form.get('address').value, 
         plan: this.form.get('plan').value, 
         course: this.form.get('course').value, 
-        nationality: this.form.get('nationality').value
+        nationality: this.form.get('nationality').value,
+        createdBy: this.username
       }
- 
+      console.log(this.username);
     this.blogservice.newclient(blog).subscribe(data => {
-        if (!data.success) {     
+        if (!data.success) {          
           this.messageClass = 'alert alert-danger'; // Return error class
           this.message = data.message; // Return error message
           this.processing = false; // Enable submit button
@@ -114,6 +116,7 @@ export class BlogComponent implements OnInit {
         } else {
           this.messageClass = 'alert alert-success'; // Return success class
           this.message = data.message; // Return success message
+          this.getAllClients();
           setTimeout(() => {
             this.newPost = false; // Hide form
             this.processing = false; // Enable submit button
@@ -138,9 +141,19 @@ export class BlogComponent implements OnInit {
     goBack() {
       window.location.reload(); // Clear all variable states
     }
+
+    getAllClients(){
+      this.blogservice.getAllClient().subscribe(data =>{
+      this.blogPosts = data.blogs;
+      });
+    }
 ngOnInit() {
         this.authservice.getProfile().subscribe(profile => {
         this.username = profile.username;
+      });
+      this.getAllClients();
+      this.authservice.getProfile().subscribe(profile => {
+        this.username = profile.user.username;
       });
     }
 }

@@ -27,7 +27,8 @@ module.exports = (router) => {
                                 } else {
                                     if(!req.body.nationality){
                                         res.json({ success:false, message:'Nationality is Required'});
-                                    } else {
+                                    }                                    
+                                    else {
                                             const blog = new Blog ({
                                                 firstname : req.body.firstname,
                                                 email : req.body.email,
@@ -37,7 +38,7 @@ module.exports = (router) => {
                                                 plan : req.body.plan,
                                                 course:req.body.course,
                                                 nationality : req.body.nationality,
-                                                AddedOn : req.body.AddedOn
+                                                createdon : req.body.createdon
                                             });
                                             blog.save((err)=>{
                                                 if(err){
@@ -64,7 +65,8 @@ module.exports = (router) => {
                                                                             } else {
                                                                                 if(err.errors.nationality){
                                                                                     res.json({ success:false,message : err.errors.nationality.message}); 
-                                                                                } else {
+                                                                                }
+                                                                                 else {
                                                                                         res.json({ success:false,message:err});
                                                                                     }
                                                                                 }
@@ -74,9 +76,8 @@ module.exports = (router) => {
                                                                     }
                                                                 }
                                                             }
-                                                        }
-                                                    }
-                                                                                                  
+                                                        } 
+                                                    }                                                                                                   
                                                 else {
                                                     res.json({ success:true,message:'Client Details Saved'});
                                                 }   
@@ -90,6 +91,19 @@ module.exports = (router) => {
                 }
             }
         
+    });
+    router.get('/allBlogs',(req,res)=>{
+        Blog.find({},(err,blogs)=>{
+            if(err){
+                res.json({ success:false,message : err });
+            } else {
+                if(!blogs){
+                    res.json({ success:false,message:'No Blogs Found.'})
+                } else {
+                    res.json({ success:true, blogs:blogs });
+                }
+            }
+        }).sort({'_id':-1});
     });
     return router;
 };
