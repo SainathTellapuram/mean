@@ -38,7 +38,7 @@ module.exports = (router) => {
                                                 plan : req.body.plan,
                                                 course:req.body.course,
                                                 nationality : req.body.nationality,
-                                                createdon : req.body.createdon
+                                                createdBy: req.body.createdBy 
                                             });
                                             blog.save((err)=>{
                                                 if(err){
@@ -105,5 +105,85 @@ module.exports = (router) => {
             }
         }).sort({'_id':-1});
     });
+
+    router.get('/singleBlog/:id',(req,res)=>{
+        if(!req.params.id){
+            res.json({ success:false,message:'No Client ID was Provided'})
+        } else {
+            Blog.findOne({_id:req.params.id},(err,blog)=>{
+                if(err){
+                    res.json({success:false,message:'Not a valid Client'});
+                } else {
+                    if(!blog){
+                        res.json({ success:false,message:'Client Not Found'});
+                    } else {
+                        User.findOne({_id:req.decoded.userId},(err,user)=>{
+                            if(err){
+                                res.json({ success:false,message:err});
+                            } else {
+                                if(!user){
+                                    res.json({ success:false,message:'unable to authenticate user'});
+                                } else {
+                                    if(user.username !== blog.createdBy){
+                                        res.json({ success:false,message:'You are not authorized to edit this Client'})
+                                    } else {
+                                        res.json({ success:true,blog:blog});
+                                    }
+                                }
+                            }
+                        })
+                        res.json({ success:true,blog:blog});
+                    }
+                }
+            });
+        }
+
+    });
+    router.put ('/updateBlog',(req,res)=>{
+        if(!req.body_id){
+            res.json({ success: false,message:' No Client id Provided'});
+        } else {
+            Blog.findOne({ _id: req.body._id},(err,blog) =>{
+                if(err){
+                    res.json({ success:false, message:'Not a valid Client Id'})
+                } else {
+                    if(!blog){
+                        res.json({ success:false,message:'Client id was not Found.'})
+                    } else {
+                        User.findOne({_id:req.decoded.userId},(err,user)=>{
+                            if(err){
+                                res.json({ success:false,message:err});
+                            } else {
+                                if(!user){
+                                    res.json({ success:false,message:'Unable to Authenticate user.'});
+                                } else {
+                                    if(user.username !== blog.createdBy){
+                                        res.json({ success:false,message:'You are not authorized to edit this Client'})
+                                    } else {
+                                        blog.title = req.body.title;
+                                        blog.firstname = req.body.firstname;
+                                        blog.email = req.body.email;
+                                        blog.mobile = req.body.mobile;
+                                        blog.qualification = req.body.qualification;
+                                        blog.address = req.body.address;
+                                        blog.plan = req.body.plan;
+                                        blog.course = req.body.course;
+                                        blog.nationality = req.body.nationality;
+                                        blog.save((err)=>{
+                                            if(err){
+                                                res.json({success:false,message:err});
+                                            } else {
+                                                res.json({ success:true,message:'Client Updated'});
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        }
+    })
     return router;
 };

@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 })
 export class ProfileComponent implements OnInit {
   username = ' ';
-  email = ' ';
+  email = '';
   constructor(private authService: AuthService){}
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {

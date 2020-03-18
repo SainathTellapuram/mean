@@ -104,49 +104,53 @@
        <button [disabled]="processing" type="submit" name="button" (click)="goBack()" class="btn btn-warning">Go Back</button>
 </form>
 <div *ngIf="!newPost">
-<div id="accordion" *ngFor="let blog of blogPosts; let i = index">
-   
-   <div class="card" >
-      <div class="card-header">
-         <a class="card-link" href="#List-{{ i }}"  data-toggle="collapse" href="#collapseOne">
-            {{blog.firstname | uppercase}}
-         </a>
-         <p class="pull-right">Status</p>
-      </div>
-      <div id="collapseOne" id="List-{{ i }}"  class="collapse hide" data-parent="#accordion">
-         <div class="card-body">
-            <table class="table">
-               <tr class="thead-dark">
-                  <td>Email : {{blog.email}}</td>
-                  <td>Mobile : {{blog.mobile}}</td>
-               </tr>
-               <tr>
-               <td>Qualification : {{blog.qualification}}</td>
-                  <td>Address : {{blog.address}}</td>
-               </tr>
-               <tr>
-                  <td>Selected Plan : {{blog.plan}}</td>
-                  <td>Course Opted  : {{blog.course}}</td>
-               </tr>
-               <tr>
-                  <td>Nationality :{{blog.nationality}}</td>
-                  <td>
-                     <div class="btn-group dropdown">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropup
-                        </button>
-                        <div class="dropdown-menu">
-                           <a class="dropdown-item" href="#">Started</a>
-                           <a class="dropdown-item" href="#">In Process</a>
-                           <a class="dropdown-item" href="#">Completed</a>
-                        </div>
-                     </div>
-                  </td>
-               </tr>
-            </table>
-            <a href="#"><button type="button" name="button" class="btn btn-sm btn-success m-2">Edit</button></a>
-            <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
-         </div>
+   <div id="accordion" *ngFor="let blog of blogPosts; let i = index;">
+      <div class="container" *ngIf = "username === blog.createdBy">
+         <div class="card">
+            <div class="card-header">
+               <a class="card-link" href="#List-{{ i }}"  data-toggle="collapse" href="#collapseOne">
+                  {{blog.firstname | uppercase}}
+               </a>
+               <p class="pull-right">Status</p>
+            </div>
+            <div id="collapseOne" id="List-{{ i }}"  class="collapse hide" data-parent="#accordion">
+               <div class="card-body">
+                  <table class="table">
+                     <tr class="thead-dark">
+                        <td>Email : {{blog.email}}</td>
+                        <td>Mobile : {{blog.mobile}}</td>
+                     </tr>
+                     <tr>
+                        <td>Qualification : {{blog.qualification}}</td>
+                        <td>Address : {{blog.address}}</td>
+                     </tr>
+                     <tr>
+                        <td>Selected Plan : {{blog.plan}}</td>
+                        <td>Course Opted  : {{blog.course}}</td>
+                     </tr>
+                     <tr>
+                        <td>Nationality :{{blog.nationality}}</td>
+                        <td>
+                           <div class="btn-group dropdown">
+                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Dropup
+                              </button>
+                              <div class="dropdown-menu">
+                                 <a class="dropdown-item" href="#">Started</a>
+                                 <a class="dropdown-item" href="#">In Process</a>
+                                 <a class="dropdown-item" href="#">Completed</a>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+      <!-- Edit Button -->
+      <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <!-- Delete Button -->
+      <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+
+               </div>
+            </div>
       </div>
    </div>
 </div>

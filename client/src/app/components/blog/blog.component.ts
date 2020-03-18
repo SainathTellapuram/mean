@@ -16,6 +16,7 @@ export class BlogComponent implements OnInit {
   processing = false;
   username = '';
   blogPosts;
+  userFilter: any;
   constructor(
     private formBuilder: FormBuilder,
     private blogservice: BlogService,
@@ -106,7 +107,6 @@ export class BlogComponent implements OnInit {
         nationality: this.form.get('nationality').value,
         createdBy: this.username
       }
-      console.log(this.username);
     this.blogservice.newclient(blog).subscribe(data => {
         if (!data.success) {          
           this.messageClass = 'alert alert-danger'; // Return error class
@@ -149,11 +149,8 @@ export class BlogComponent implements OnInit {
     }
 ngOnInit() {
         this.authservice.getProfile().subscribe(profile => {
-        this.username = profile.username;
-      });
-      this.getAllClients();
-      this.authservice.getProfile().subscribe(profile => {
         this.username = profile.user.username;
       });
+    this.getAllClients();
     }
 }

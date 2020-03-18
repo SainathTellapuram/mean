@@ -1,0 +1,58 @@
+<h1 class="page-header">Edit Client Details</h1>
+
+<!-- Custom Success/Erro Message -->
+<div class="row show-hide-message" *ngIf="message">
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<!-- Edit Blog Form -->
+<form (submit)="updateBlogSubmit()" *ngIf="!loading">
+  <!-- First Name Field -->
+  <div class="form-group">
+    <label for="firstname">First Name</label>
+    <input [disabled]="processing" type="text" name="firstname" placeholder="First Name" class="form-control" [(ngModel)]="blog.firstname"/>
+  </div>
+   <!-- Email Field -->
+   <div class="form-group">
+    <label for="email">Email</label>
+    <input [disabled]="processing" type="text" name="email" placeholder="Email" class="form-control" [(ngModel)]="blog.email"/>
+  </div>
+     <!-- Mobile Field -->
+     <div class="form-group">
+        <label for="mobile">Mobile</label>
+        <input [disabled]="processing" type="text" name="mobile" placeholder="Mobile" class="form-control" [(ngModel)]="blog.mobile"/>
+      </div>
+      <!-- Qualification Field -->
+      <div class="form-group">
+       <label for="qualification">Qualification</label>
+       <input [disabled]="processing" type="text" name="qualification" placeholder="Qualification" class="form-control" [(ngModel)]="blog.qualification"/>
+     </div>
+    <!-- Address Field -->
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input [disabled]="processing" type="text" name="address" placeholder="Address" class="form-control" [(ngModel)]="blog.address"/>
+      </div>
+    <!-- Plan Field -->
+      <div class="form-group">
+        <label for="plan">Plan</label>
+        <input [disabled]="processing" type="text" name="plan" placeholder="Plan" class="form-control" [(ngModel)]="blog.plan"/>
+      </div>
+    <!-- course Field -->
+    <div class="form-group">
+        <label for="course">Course</label>
+        <input [disabled]="processing" type="text" name="course" placeholder="course" class="form-control" [(ngModel)]="blog.course"/>
+      </div>
+    <!-- nationality Field -->
+      <div class="form-group">
+        <label for="nationality">Nationality</label>
+        <input [disabled]="processing" type="text" name="nationality" placeholder="Nationality" class="form-control" [(ngModel)]="blog.nationality"/>
+      </div>
+      <!-- Delete Button -->
+      <a [routerLink]="['/delete-blog/', blog._id]"><button  [disabled]="processing"  type="button" name="button" class="btn btn-danger">Delete</button></a>
+      <!-- Go Back Button -->
+      <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
+      <!-- Save Changes Button -->
+      <button [disabled]="processing" type="submit" name="save" class="btn btn-info">Save Changes</button>
+
+</form>
