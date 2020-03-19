@@ -48,6 +48,17 @@
         <label for="nationality">Nationality</label>
         <input [disabled]="processing" type="text" name="nationality" placeholder="Nationality" class="form-control" [(ngModel)]="blog.nationality"/>
       </div>
+      <!-- Status Field -->
+      <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Status
+        </button>
+        <div class="dropdown-menu">
+           <a class="dropdown-item" href="#">Started</a>
+           <a class="dropdown-item" href="#">In Process</a>
+           <a class="dropdown-item" href="#">Completed</a>
+        </div>
+     </div>
       <!-- Delete Button -->
       <a [routerLink]="['/delete-blog/', blog._id]"><button  [disabled]="processing"  type="button" name="button" class="btn btn-danger">Delete</button></a>
       <!-- Go Back Button -->

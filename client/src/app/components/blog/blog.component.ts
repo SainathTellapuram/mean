@@ -14,9 +14,8 @@ export class BlogComponent implements OnInit {
   loadingBlogs = false;
   form;
   processing = false;
-  username = '';
+  username;
   blogPosts;
-  userFilter: any;
   constructor(
     private formBuilder: FormBuilder,
     private blogservice: BlogService,

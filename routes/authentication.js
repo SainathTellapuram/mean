@@ -4,13 +4,13 @@ const config =  require('../config/database');
 module.exports = (router) =>{
     router.post('/register',(req,res)=>{
         if(!req.body.email){
-            res.json({success:false,message: 'You Must provide an EMail'});
+            res.json({success:false,message: 'You must provide an email'});
         } else {
             if(!req.body.username){
-                res.json({success:false,message: 'You Must provide an User Name'});
+                res.json({success:false,message: 'You must provide an username'});
             } else {
                 if(!req.body.password){
-                    res.json({success:false,message: 'You Must provide an Password'});
+                    res.json({success:false,message: 'You must provide an password'});
                 } else {
                 let user = new User({
                     email:req.body.email.toLowerCase(),
@@ -37,7 +37,7 @@ module.exports = (router) =>{
                             }
                         }
                     }else {
-                        res.json({success:false,message:'could Not save user. Error:',err});
+                        res.json({success:false,message:'Could not save user. Error:',err});
                     } 
                 }
             } else {

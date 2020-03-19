@@ -132,58 +132,31 @@ module.exports = (router) => {
                                 }
                             }
                         })
-                        res.json({ success:true,blog:blog});
+
                     }
                 }
             });
         }
-
     });
-    router.put ('/updateBlog',(req,res)=>{
-        if(!req.body_id){
-            res.json({ success: false,message:' No Client id Provided'});
-        } else {
-            Blog.findOne({ _id: req.body._id},(err,blog) =>{
+    router.put('/updateBlog',(req,res) =>{
+        Blog.findOne({ _id: req.body._id},(err,blog) =>{
+            blog.title = req.body.title;
+            blog.firstname = req.body.firstname;
+            blog.email = req.body.email;
+            blog.mobile = req.body.mobile;
+            blog.qualification = req.body.qualification;
+            blog.address = req.body.address;
+            blog.plan = req.body.plan;
+            blog.course = req.body.course;
+            blog.nationality = req.body.nationality;
+            blog.save((err)=>{
                 if(err){
-                    res.json({ success:false, message:'Not a valid Client Id'})
+                    res.json({success:false,message:err});
                 } else {
-                    if(!blog){
-                        res.json({ success:false,message:'Client id was not Found.'})
-                    } else {
-                        User.findOne({_id:req.decoded.userId},(err,user)=>{
-                            if(err){
-                                res.json({ success:false,message:err});
-                            } else {
-                                if(!user){
-                                    res.json({ success:false,message:'Unable to Authenticate user.'});
-                                } else {
-                                    if(user.username !== blog.createdBy){
-                                        res.json({ success:false,message:'You are not authorized to edit this Client'})
-                                    } else {
-                                        blog.title = req.body.title;
-                                        blog.firstname = req.body.firstname;
-                                        blog.email = req.body.email;
-                                        blog.mobile = req.body.mobile;
-                                        blog.qualification = req.body.qualification;
-                                        blog.address = req.body.address;
-                                        blog.plan = req.body.plan;
-                                        blog.course = req.body.course;
-                                        blog.nationality = req.body.nationality;
-                                        blog.save((err)=>{
-                                            if(err){
-                                                res.json({success:false,message:err});
-                                            } else {
-                                                res.json({ success:true,message:'Client Updated'});
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-                        });
-                    }
+                    res.json({ success:true,message:'Client Updated'});
                 }
-            })
-        }
-    })
-    return router;
-};
+            })          
+        });
+    });
+    return router
+}

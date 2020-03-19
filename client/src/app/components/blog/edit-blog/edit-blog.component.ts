@@ -11,26 +11,18 @@ export class EditBlogComponent implements OnInit {
   message;
   messageClass;
   processing = false;
-  blog = {
-    firstname : String,
-    email: String,
-    mobile: String,
-    qualification: String,
-    address: String,
-    plan: String,
-    course: String,
-    nationality: String,
-  }
+  blog;
   currentUrl;
   loading = true ;
   constructor(
     private location : Location,
+    private activatedRoute: ActivatedRoute,
     private BlogService : BlogService,
-    private route : ActivatedRoute,
     private router:Router
   ) { }
   updateBlogSubmit(){
     this.processing = true;
+    console.log(this.blog)
     this.BlogService.editBlog(this.blog).subscribe(data =>{
       if(!data.success){
         this.messageClass = 'alert alert-danger';
@@ -49,7 +41,7 @@ export class EditBlogComponent implements OnInit {
     this.location.back()
   }
   ngOnInit() {
-    this.currentUrl = this.route.snapshot.params;
+    this.currentUrl = this.activatedRoute.snapshot.params;
     this.BlogService.getSingleBlog(this.currentUrl.id).subscribe(data => {
       if(!data.success){
         this.messageClass = 'alert alert-danger';
