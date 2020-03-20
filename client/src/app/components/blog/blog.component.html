@@ -146,9 +146,7 @@
                   </table>
       <!-- Edit Button -->
       <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
-      <!-- Delete Button -->
-      <a href="#"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
-
+      <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
                </div>
             </div>
       </div>
