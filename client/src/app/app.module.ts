@@ -16,6 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notauth.guard';
 import { BlogComponent } from './components/blog/blog.component';
 import { BlogService } from './services/blog.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { EditBlogComponent } from './components/blog/edit-blog/edit-blog.component';import { FormsModule } from '@angular/forms';
 import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.component';
 @NgModule({
@@ -35,6 +36,7 @@ import { DeleteBlogComponent } from './components/blog/delete-blog/delete-blog.c
   imports: [
     BrowserModule,
     HttpModule,
+    NgSelectModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

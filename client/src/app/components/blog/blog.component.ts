@@ -7,7 +7,12 @@ import { BlogService } from '../../services/blog.service';
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
+export class Profile { 
+  constructor(public prId:string, public prName:string) {
+  }	
+} 
 export class BlogComponent implements OnInit {  
+ 
   messageClass;
   message;
   newPost = false;
@@ -19,10 +24,15 @@ export class BlogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private blogservice: BlogService,
-    private authservice: AuthService
+    private authservice: AuthService,public prId:string, public prName:string
   ) {
     this.createNewClientForm();
     }
+    allProfiles = [
+      new Profile('one', 'Started'),
+      new Profile('two', 'In Process'),
+      new Profile('three', 'Completed')
+  ]
   createNewClientForm(){
     this.form = this.formBuilder.group({
       firstname : ['',Validators.compose([
@@ -64,7 +74,8 @@ export class BlogComponent implements OnInit {
         Validators.required,
         Validators.maxLength(12),
         Validators.minLength(5),
-      ])]
+      ])],
+      profile: [null, [ Validators.required ] ],
     })
   }
       // Enable new blog form
@@ -77,6 +88,7 @@ export class BlogComponent implements OnInit {
         this.form.get('plan').enable();
         this.form.get('course').enable();
         this.form.get('nationality').enable();
+        this.form.get('profile').enable();
       }
     
       // Disable new blog form
@@ -89,6 +101,7 @@ export class BlogComponent implements OnInit {
         this.form.get('plan').disable();
         this.form.get('course').disable();
         this.form.get('nationality').disable();
+        this.form.get('profile').enable();
       }
 
 
@@ -104,7 +117,9 @@ export class BlogComponent implements OnInit {
         plan: this.form.get('plan').value, 
         course: this.form.get('course').value, 
         nationality: this.form.get('nationality').value,
-        createdBy: this.username
+        createdBy: this.username,
+        profile:this.form.get('profile').value
+        
       }
     this.blogservice.newclient(blog).subscribe(data => {
         if (!data.success) {          

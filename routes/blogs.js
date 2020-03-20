@@ -38,7 +38,8 @@ module.exports = (router) => {
                                                 plan : req.body.plan,
                                                 course:req.body.course,
                                                 nationality : req.body.nationality,
-                                                createdBy: req.body.createdBy 
+                                                createdBy: req.body.createdBy,
+                                                profile:req.body.profile
                                             });
                                             blog.save((err)=>{
                                                 if(err){

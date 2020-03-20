@@ -100,6 +100,14 @@
            </ul>
           </div>
        </div>
+       <div class="form-group">
+         <select formControlName="profile">
+            <option [ngValue]="null" disabled>Status</option>
+            <option *ngFor="let prf of allProfiles" [ngValue]="prf">
+               {{ prf.prName }}
+            </option>
+         </select>
+       </div>
        <button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-success">Submit</button>
        <button [disabled]="processing" type="submit" name="button" (click)="goBack()" class="btn btn-warning">Go Back</button>
 </form>
@@ -141,6 +149,11 @@
                                  <a class="dropdown-item" href="#">Completed</a>
                               </div>
                            </div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           <input type="file" accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                         </td>
                      </tr>
                   </table>
